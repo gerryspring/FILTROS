@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ConvVista extends JFrame {
-    JLabel name,age;
+    JLabel name,age,result,output;
     TextField nameT;
     NumberField ageT;
 
@@ -25,8 +25,10 @@ public class ConvVista extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(0,2));
 
-        name = new JLabel("Nombre",JLabel.CENTER);
+        name = new JLabel("Name",JLabel.CENTER);
         age = new JLabel("Age",JLabel.CENTER);
+        result = new JLabel("Result: ",JLabel.CENTER);
+        output = new JLabel("", JLabel.CENTER);
 
         nameT = new TextField(50);
         ageT = new NumberField(15);
@@ -35,6 +37,8 @@ public class ConvVista extends JFrame {
         add(nameT);
         add(age);
         add(ageT);
+        add(result);
+        add(output);
 
 
     }
