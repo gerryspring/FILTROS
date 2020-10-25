@@ -1,8 +1,8 @@
-package vista;
+package main.vista;
 
 import Componentes.StandardComboBox;
 import Componentes.StandardLabel;
-import controlador.ComboControlador;
+import main.controlador.ComboControlador;
 
 import javax.swing.*;
 import java.awt.*;

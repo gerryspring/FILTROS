@@ -1,15 +1,12 @@
-package vista;
-
-import MVC.ConvControlador;
-import controlador.ComboControlador;
+package main.vista;
 
 import javax.swing.*;
 
-public class ComboVista extends JFrame {
+public class VistaPrincipal extends JFrame {
 
     public JComboEMC combo;
 
-    public ComboVista(){
+    public VistaPrincipal(){
         super("ESTADOS MUNICIPIOS Y CIUDADES.");
         doInterface();
     }

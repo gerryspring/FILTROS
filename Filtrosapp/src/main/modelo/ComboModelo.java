@@ -1,10 +1,9 @@
-package modelo;
+package main.modelo;
 
-import Componentes.StandardComboBox;
-import modelo.FILES.ArchivoCiudades;
-import modelo.FILES.ArchivoEstados;
-import modelo.FILES.ArchivoMunicipios;
-import vista.JComboEMC;
+import main.modelo.FILES.ArchivoCiudades;
+import main.modelo.FILES.ArchivoEstados;
+import main.modelo.FILES.ArchivoMunicipios;
+import main.vista.JComboEMC;
 
 import java.io.IOException;
 

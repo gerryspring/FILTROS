@@ -1,10 +1,8 @@
-package controlador;
+package main.controlador;
 
-import modelo.ComboModelo;
-import vista.ComboVista;
-import vista.JComboEMC;
+import main.modelo.ComboModelo;
+import main.vista.JComboEMC;
 
-import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
