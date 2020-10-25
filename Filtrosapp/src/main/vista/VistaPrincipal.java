@@ -1,24 +1,34 @@
 package main.vista;
 
+import main.controlador.ComboControlador;
+import main.modelo.ComboModelo;
+
 import javax.swing.*;
+import java.io.IOException;
 
 public class VistaPrincipal extends JFrame {
 
-    public JComboEMC combo;
+    private JComboEMC vista;
+    private ComboModelo modelo;
+    private ComboControlador controlador;
 
-    public VistaPrincipal(){
+    public VistaPrincipal() throws IOException {
         super("ESTADOS MUNICIPIOS Y CIUDADES.");
         doInterface();
     }
 
-    private void doInterface(){
+    private void doInterface() throws IOException {
         setSize(400,200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        combo = new JComboEMC("BAJA CALIFORNIA");
 
-        add(combo);
+        vista = new JComboEMC("BAJA CALIFORNIA","ENSENADA");
+        modelo = new ComboModelo();
+        controlador = new ComboControlador(vista,modelo);
+
+        vista.setListeners(controlador);
+        add(vista);
 
     }
 }

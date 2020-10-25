@@ -88,9 +88,8 @@ public class ArchivoMunicipios extends ControladorFicheros {
 
 
         while(ultimo<=primero){
-
             centro = (primero+ultimo) / 2;
-            archivo.seek(centro*getTamañoRegistro()+8);
+            archivo.seek(centro*getTamañoRegistro());
 
             valorCentro = archivo.readUTF().trim();
             System.out.println(valorCentro);
@@ -134,8 +133,6 @@ public class ArchivoMunicipios extends ControladorFicheros {
         return 60;
     }
 
-    public static void main(String[] args) throws IOException {
-        ArchivoMunicipios file = new ArchivoMunicipios();
 /**
          file.record(1,"Ensenada");
          file.record(1,"Mexicali");
@@ -161,6 +158,4 @@ public class ArchivoMunicipios extends ControladorFicheros {
 
 **/
 
-
-    }
 }
