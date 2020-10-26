@@ -5,6 +5,7 @@ import main.modelo.FILES.ArchivoEstados;
 import main.modelo.FILES.ArchivoMunicipios;
 import main.vista.JComboEMC;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class ComboModelo {
@@ -23,9 +24,12 @@ public class ComboModelo {
     String state = null;
     String municipalitie = null;
 
+    public void setData(int state){
+
+    }
     public void setNames(JComboEMC combo) throws IOException {
 
-        switch (combo.state){
+        switch (combo.valor){
             case 1:
                     setData(combo);
                     break;
@@ -82,6 +86,9 @@ public class ComboModelo {
     }
 
     private void setMunicipalities(JComboEMC combo) throws  IOException{
+
+        combo.combomunicipalities.removeAllItems();
+
         combo.combomunicipalities.insertItemAt("SELECCIONE",0);
         combo.combomunicipalities.setSelectedIndex(0);
 
@@ -101,7 +108,21 @@ public class ComboModelo {
 
         }
 
+        public void setState(String estado, JComboEMC combo) throws IOException {
+            int busqueda = statesFile.binarysearch(estado);
+            idState = statesFile.getID(busqueda);
+            setMunicipalities(combo);
+        }
+
+        public void setMunicipalitie(String estado, JComboEMC combo) throws IOException{
+            int busqueda = municipalitiesFile.binarysearch(estado);
+            idMunicipalitie = municipalitiesFile.getID(busqueda);
+            setCities(combo);
+        }
+
     private void setCities(JComboEMC combo) throws IOException  {
+        combo.combocities.removeAllItems();
+
         combo.combocities.insertItemAt("SELECCIONE",0);
         combo.combocities.setSelectedIndex(0);
 

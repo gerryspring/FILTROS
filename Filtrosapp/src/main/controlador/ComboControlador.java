@@ -29,7 +29,26 @@ public class ComboControlador implements ItemListener {
 
             if(cadena.compareTo("SELECCIONE")==0)
                 return;
+            try {
+                modelo.setState(cadena,vista);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
 
+            return;
+        }
+        if(e.getSource() == vista.combomunicipalities){
+            String cadena = (String) vista.combomunicipalities.getSelectedItem();
+
+            if(cadena.compareTo("SELECCIONE")==0)
+                return;
+            try {
+                modelo.setMunicipalitie(cadena,vista);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+            return;
         }
     }
 }

@@ -10,27 +10,27 @@ import java.awt.*;
 public class JComboEMC extends JPanel {
 
     StandardLabel states,municipalities,cities;
-    public int state;
+    public int valor;
     public String inputstate,inputminicipalitie;
 
     public StandardComboBox combostate, combomunicipalities,combocities;
 
     public JComboEMC(){
         doInterface();
-        state = 1;
+        valor = 1;
     }
 
     public JComboEMC(String estado){
         doInterface();
         inputstate = estado;
-        state = 2;
+        valor = 2;
     }
 
     public JComboEMC(String estado, String municipio){
         doInterface();
         inputstate = estado;
         inputminicipalitie = municipio;
-        state = 3;
+        valor = 3;
     }
 
 
