@@ -44,15 +44,14 @@ public class ComboModelo {
                     int checkmunicipalitie = municipalitiesFile.binarysearch(combo.inputminicipalitie);
 
                     if(checkstate == -1 || checkmunicipalitie == -1) {
-                        System.out.println(checkstate + "\t" + checkmunicipalitie);
                         return;
                     }
                     setStates(combo);
 
-
                     idState = statesFile.getID(checkstate);
                     idMunicipalitie = municipalitiesFile.getID(checkmunicipalitie);
 
+                    System.out.println("ID ESTADO: " + idState + "ID MUNICIPIO: " + idMunicipalitie  + "  " + checkmunicipalitie );
                     combo.combostate.setSelectedIndex(idState);
                     combo.combomunicipalities.setSelectedIndex(idMunicipalitie);
 

@@ -31,13 +31,50 @@ public class ArchivoMunicipios extends ControladorFicheros {
         ID++;
     }
 
+    public void ordenar() throws IOException {
+        String muni, munj;
+        int idi, idj,idei,idej;
+
+        archivo.seek(0);
+
+        for (int i = 0; i < getTotalRegistros() - 1; i++) {
+            for (int j = i+1; j < getTotalRegistros(); j++) {
+
+                archivo.seek(i * getTamañoRegistro());
+                idi = archivo.readInt();
+                idei = archivo.readInt();
+                muni = archivo.readUTF();
+
+                archivo.seek(j * getTamañoRegistro());
+                idj = archivo.readInt();
+                idej = archivo.readInt();
+                munj = archivo.readUTF();
+
+                if (muni.compareToIgnoreCase(munj) > 0) {
+                    archivo.seek(i * getTamañoRegistro());
+
+                    archivo.writeInt(idj);
+                    archivo.writeInt(idej);
+                    archivo.writeUTF(munj);
+
+                    archivo.seek(j * getTamañoRegistro());
+
+                    archivo.writeInt(idi);
+                    archivo.writeInt(idei);
+                    archivo.writeUTF(muni);
+                }
+            }
+        }
+    }
+
+
+
     public String[] getData(int stateID) throws IOException {
         ArrayList<String> aux = new ArrayList<>();
         for(int i=0;i<getTotalRegistros();i++) {
             archivo.seek(i*getTamañoRegistro()+4);
             int id = archivo.readInt();
 
-            System.out.println(id + "\t" + stateID);
             if(id==stateID)
                 aux.add(archivo.readUTF());
 
@@ -81,19 +118,16 @@ public class ArchivoMunicipios extends ControladorFicheros {
     public int binarysearch(String name) throws IOException {
         int centro,primero,ultimo;
         String valorCentro;
-        primero = getTotalRegistros()-1;
+        primero = getTotalRegistros();
 
-        System.out.println("Total de registros: " + getTotalRegistros() + name);
+        System.out.println("Total de registros: " + getTotalRegistros());
         ultimo = 0;
-
-
         while(ultimo<=primero){
+
             centro = (primero+ultimo) / 2;
-            archivo.seek(centro*getTamañoRegistro());
+            archivo.seek(centro*getTamañoRegistro()+8);
 
             valorCentro = archivo.readUTF().trim();
-            System.out.println(valorCentro);
-
 
             int pos = name.compareToIgnoreCase(valorCentro);
 
@@ -115,8 +149,7 @@ public class ArchivoMunicipios extends ControladorFicheros {
         ArrayList<String> aux = new ArrayList<>();
 
         for(int i=0;i<getTotalRegistros();i++){
-            archivo.seek(i*getTamañoRegistro());
-            int id = archivo.readInt();
+            archivo.seek(i*getTamañoRegistro()+8);
             String name = archivo.readUTF();
 
             String chain = name.trim().toUpperCase();

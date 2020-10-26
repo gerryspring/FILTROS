@@ -32,19 +32,17 @@ public class ArchivoEstados extends ControladorFicheros {
         int centro,primero,ultimo;
         String valorCentro;
         primero = getTotalRegistros()-1;
-
-        System.out.println("Total de registros: " + getTotalRegistros());
         ultimo = 0;
 
 
         while(ultimo<=primero){
 
             centro = (primero+ultimo) / 2;
-            archivo.seek(centro*getTamañoRegistro()+4);
+            archivo.seek(centro*getTamañoRegistro());
 
+            int x  = archivo.readInt();
             valorCentro = archivo.readUTF().trim();
 
-            System.out.println(valorCentro);
 
             int pos = name.compareToIgnoreCase(valorCentro);
 
@@ -79,17 +77,65 @@ public class ArchivoEstados extends ControladorFicheros {
 
         return list;
     }
+
+
+
+
+
+    public void ordenar() throws IOException {
+        String statei, statej;
+        int idi, idj;
+
+        archivo.seek(0);
+
+        for (int i = 0; i < getTotalRegistros() - 1; i++) {
+            for (int j = i+1; j < getTotalRegistros(); j++) {
+
+                archivo.seek(i * getTamañoRegistro());
+                idi = archivo.readInt();
+                statei = archivo.readUTF();
+
+                archivo.seek(j * getTamañoRegistro());
+                idj = archivo.readInt();
+                statej = archivo.readUTF();
+
+
+
+                if (statei.compareToIgnoreCase(statej) > 0) {
+                    archivo.seek(i * getTamañoRegistro());
+
+                    archivo.writeInt(idj);
+                    archivo.writeUTF(statej);
+
+                    archivo.seek(j * getTamañoRegistro());
+
+                    archivo.writeInt(idi);
+                    archivo.writeUTF(statei);
+                }
+            }
+        }
+    }
+
+
+
+
+
     @Override
     public int getTamañoRegistro() {
         return 56;
     }
 
+    public static void main(String[] args) throws IOException {
+        ArchivoEstados file = new ArchivoEstados();
 
-        /**
-        file.record("Baja California");
-        file.record("Colima");
-        file.record("Sinaloa");
-        file.record("Ciudad de Mexico");
-**/
+
+
+         file.record("Baja California");
+         file.record("Colima");
+         file.record("Sinaloa");
+         file.record("Ciudad mexico");
+
+         file.ordenar();
+    }
 
 }

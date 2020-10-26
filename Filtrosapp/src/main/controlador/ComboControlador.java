@@ -26,7 +26,6 @@ public class ComboControlador implements ItemListener {
 
         if(e.getSource() == vista.combostate){
             String cadena = (String) vista.combostate.getSelectedItem();
-            System.out.println(cadena);
 
             if(cadena.compareTo("SELECCIONE")==0)
                 return;

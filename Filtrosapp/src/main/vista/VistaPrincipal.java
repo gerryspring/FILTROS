@@ -23,7 +23,7 @@ public class VistaPrincipal extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        vista = new JComboEMC("BAJA CALIFORNIA","ENSENADA");
+        vista = new JComboEMC("COLIMA","ARMERIA");
         modelo = new ComboModelo();
         controlador = new ComboControlador(vista,modelo);
 
