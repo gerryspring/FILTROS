@@ -20,65 +20,88 @@ public class ComboModelo {
         citiesFile = new ArchivoCiudades();
     }
 
-    public void setNames(JComboEMC combo) throws IOException {
+    String state = null;
+    String municipalitie = null;
 
+    public void setNames(JComboEMC combo) throws IOException {
 
         switch (combo.state){
             case 1:
-                    setStates(combo);
+                    setData(combo);
                     break;
             case 2:
-                    int check = statesFile.binarysearch(combo.inputstate);
-                    if(check == -1)
+                int busqueda = statesFile.binarysearch(combo.inputstate);
+
+                if(busqueda == -1)
                     return;
 
-                    setStates(combo);
+                state = combo.inputstate;
+                idState = statesFile.getID(busqueda);
 
-                    idState = statesFile.getID(check);
-                    combo.combostate.setSelectedIndex(idState);
-                    setMunicipalities(combo,idState);
+                setData(combo);
+
                     break;
 
             case 3:
-                    int checkstate = statesFile.binarysearch(combo.inputstate);
-                    int checkmunicipalitie = municipalitiesFile.binarysearch(combo.inputminicipalitie);
 
-                    if(checkstate == -1 || checkmunicipalitie == -1) {
-                        return;
-                    }
-                    setStates(combo);
+                int busquedaEstado = statesFile.binarysearch(combo.inputstate);
+                int busquedaMunicipio = municipalitiesFile.binarysearch(combo.inputminicipalitie);
 
-                    idState = statesFile.getID(checkstate);
-                    idMunicipalitie = municipalitiesFile.getID(checkmunicipalitie);
+                if(busquedaEstado == -1 || busquedaMunicipio == -1)
+                    return;
 
-                    System.out.println("ID ESTADO: " + idState + "ID MUNICIPIO: " + idMunicipalitie  + "  " + checkmunicipalitie );
-                    combo.combostate.setSelectedIndex(idState);
-                    combo.combomunicipalities.setSelectedIndex(idMunicipalitie);
+                state = combo.inputstate;
+                idState = statesFile.getID(busquedaEstado);
 
-                    setCities(combo,idState,idMunicipalitie);
+                municipalitie = combo.inputminicipalitie;
+                idMunicipalitie = municipalitiesFile.getID(busquedaMunicipio);
+
+                setData(combo);
                     break;
 
         }
     }
 
-    private void setStates(JComboEMC combo) throws IOException {
+    private void setData(JComboEMC combo) throws IOException {
+
         combo.combostate.insertItemAt("SELECCIONE",0);
         combo.combostate.setSelectedIndex(0);
-        String [] estados = statesFile.getAllData();
-        for(int i=0;i<estados.length;i++)
-            combo.combostate.insertItemAt(estados[i].trim(),(i+1));
+
+        String[] estados = statesFile.getAllData();
+
+            for (int i = 0; i < estados.length; i++) {
+                combo.combostate.insertItemAt(estados[i].trim(), (i + 1));
+
+                if(estados[i].equalsIgnoreCase(state)) {
+                    combo.combostate.setSelectedIndex(i + 1);
+                    setMunicipalities(combo);
+                }
+                }
+
+
     }
 
-    private void setMunicipalities(JComboEMC combo,int idState) throws  IOException{
+    private void setMunicipalities(JComboEMC combo) throws  IOException{
         combo.combomunicipalities.insertItemAt("SELECCIONE",0);
         combo.combomunicipalities.setSelectedIndex(0);
 
         String [] municipios = municipalitiesFile.getData(idState);
-        for(int i=0;i<municipios.length;i++)
-            combo.combomunicipalities.insertItemAt(municipios[i].trim().toUpperCase(),(i+1));
-    }
 
-    private void setCities(JComboEMC combo,int idState,int idMunicipalitie) throws IOException {
+        for(int i=0;i<municipios.length;i++) {
+            combo.combomunicipalities.insertItemAt(municipios[i].trim().toUpperCase(), (i + 1));
+
+            if(municipalitie!=null){
+             if(municipios[i].trim().equalsIgnoreCase(municipalitie.trim())) {
+                 combo.combomunicipalities.setSelectedIndex(i + 1);
+                 setCities(combo);
+             }
+            }
+
+        }
+
+        }
+
+    private void setCities(JComboEMC combo) throws IOException  {
         combo.combocities.insertItemAt("SELECCIONE",0);
         combo.combocities.setSelectedIndex(0);
 

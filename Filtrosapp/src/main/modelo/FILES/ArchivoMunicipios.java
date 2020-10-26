@@ -74,7 +74,6 @@ public class ArchivoMunicipios extends ControladorFicheros {
         for(int i=0;i<getTotalRegistros();i++) {
             archivo.seek(i*getTamañoRegistro()+4);
             int id = archivo.readInt();
-
             if(id==stateID)
                 aux.add(archivo.readUTF());
 
@@ -149,7 +148,10 @@ public class ArchivoMunicipios extends ControladorFicheros {
         ArrayList<String> aux = new ArrayList<>();
 
         for(int i=0;i<getTotalRegistros();i++){
-            archivo.seek(i*getTamañoRegistro()+8);
+            archivo.seek(i*getTamañoRegistro());
+
+            int id = archivo.readInt();
+            int idst = archivo.readInt();
             String name = archivo.readUTF();
 
             String chain = name.trim().toUpperCase();
@@ -166,29 +168,32 @@ public class ArchivoMunicipios extends ControladorFicheros {
         return 60;
     }
 
-/**
-         file.record(1,"Ensenada");
-         file.record(1,"Mexicali");
-         file.record(1,"Tecate");
-         file.record(1,"Tijuana");
-         file.record(1,"Playas de Rosarito");
-         file.record(1,"San Quintin");
+        /**
+ArchivoMunicipios file = new ArchivoMunicipios();
+        file.record(1, "Ensenada");
+        file.record(1, "Mexicali");
+        file.record(1, "Tecate");
+        file.record(1, "Tijuana");
+        file.record(1, "Playas de Rosarito");
+        file.record(1, "San Quintin");
 
-         file.record(2,"Armeria");
-         file.record(2,"Colima");
-         file.record(2,"Comala");
-         file.record(2,"Coquimatlan");
+        file.record(2, "Armeria");
+        file.record(2, "Colima");
+        file.record(2, "Comala");
+        file.record(2, "Coquimatlan");
 
-         file.record(3,"Ahome");
-         file.record(3,"Angostura");
-         file.record(3,"Badiraguato");
-         file.record(3,"Culiacan");
+        file.record(3, "Ahome");
+        file.record(3, "Angostura");
+        file.record(3, "Badiraguato");
+        file.record(3, "Culiacan");
 
-         file.record(4,"Alvaro Obregon");
-         file.record(4,"Iztapalapa");
-         file.record(4,"Benito Juarez");
-         file.record(4,"Coyocan");
+        file.record(4, "Alvaro Obregon");
+        file.record(4, "Iztapalapa");
+        file.record(4, "Benito Juarez");
+        file.record(4, "Coyocan");
 
-**/
+        file.ordenar();
+
+    **/
 
 }

@@ -125,7 +125,7 @@ public class ArchivoEstados extends ControladorFicheros {
         return 56;
     }
 
-    public static void main(String[] args) throws IOException {
+    /**
         ArchivoEstados file = new ArchivoEstados();
 
 
@@ -133,9 +133,9 @@ public class ArchivoEstados extends ControladorFicheros {
          file.record("Baja California");
          file.record("Colima");
          file.record("Sinaloa");
-         file.record("Ciudad mexico");
+         file.record("Ciudad  mexico");
 
          file.ordenar();
-    }
 
+**/
 }

@@ -18,6 +18,47 @@ public class ArchivoCiudades extends ControladorFicheros {
         super("CIUDADES.DOC");
     }
 
+    public void ordenar() throws IOException {
+        String cityi, cityj;
+        int idi, idj,idei,idej,idmi,idmj;
+
+        archivo.seek(0);
+
+        for (int i = 0; i < getTotalRegistros() - 1; i++) {
+            for (int j = i+1; j < getTotalRegistros(); j++) {
+
+                archivo.seek(i * getTamañoRegistro());
+                idi = archivo.readInt();
+                idei = archivo.readInt();
+                idmi = archivo.readInt();
+                cityi = archivo.readUTF();
+
+                archivo.seek(j * getTamañoRegistro());
+                idj = archivo.readInt();
+                idej = archivo.readInt();
+                idmj = archivo.readInt();
+                cityj = archivo.readUTF();
+
+                if (cityi.compareToIgnoreCase(cityj) > 0) {
+                    archivo.seek(i * getTamañoRegistro());
+                    System.out.println("Escribiendo");
+                    archivo.writeInt(idj);
+                    archivo.writeInt(idej);
+                    archivo.writeInt(idmj);
+                    archivo.writeUTF(cityj);
+
+                    archivo.seek(j * getTamañoRegistro());
+
+                    archivo.writeInt(idi);
+                    archivo.writeInt(idei);
+                    archivo.writeInt(idmi);
+                    archivo.writeUTF(cityi);
+                }
+            }
+        }
+    }
+
+
     public void record(int IDESTADO,int IDMUNICIPIO,String ciudad) throws IOException {
         System.out.println("LA LINGITUD ES: "+archivo.length());
         archivo.seek(archivo.length());
@@ -116,8 +157,7 @@ public class ArchivoCiudades extends ControladorFicheros {
         ArrayList<String> aux = new ArrayList<>();
 
         for(int i=0;i<getTotalRegistros();i++){
-            archivo.seek(i*getTamañoRegistro());
-            int id = archivo.readInt();
+            archivo.seek(i*getTamañoRegistro()+12);
             String name = archivo.readUTF();
 
             String chain = name.trim().toUpperCase();
@@ -136,7 +176,15 @@ public class ArchivoCiudades extends ControladorFicheros {
 
     public static void main(String[] args) throws IOException {
         ArchivoCiudades file = new ArchivoCiudades();
-/**
+
+        String [] aux = file.getAllData();
+
+        for(String element: aux)
+            System.out.println(element);
+
+//        file.ordenar();
+
+        /**
          file.record(1,1,"La Mision");
          file.record(1,1,"El Porvenir");
          file.record(1,1,"Ojos Negros");
@@ -253,13 +301,7 @@ public class ArchivoCiudades extends ControladorFicheros {
          file.record(4,4,"La Concepcion");
          file.record(4,4,"Santa Catarina");
 
-        ArrayList<String> aux = file.getAllData();
-
-        for(String element:aux)
-            System.out.println(element);
-
-
+         file.ordenar();
 **/
-
     }
 }

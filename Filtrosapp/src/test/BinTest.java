@@ -17,17 +17,19 @@ public class BinTest extends ControladorFicheros {
         String [] auxb = municipios.getAllData();
 
         int x = estados.binarysearch("Baja california");
-
+        int p = estados.getID(x);
         int y = municipios.binarysearch("Ensenada");
-        System.out.println(x);
+        System.out.println(p);
 
 //        estados.ordenar();
 
        // municipios.ordenar();
-        for(String elemento:auxb)
+        for(String elemento:aux)
             System.out.println(elemento);
 
+        System.out.println("\n\n\n");
 
+        System.out.println("SINALOA".equalsIgnoreCase("Sinaloa"));
     }
     public BinTest(String rute) throws IOException {
         super(rute);
