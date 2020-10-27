@@ -1,4 +1,4 @@
-package MVC;
+package clemente.MVC;
 
 import Componentes.NumberField;
 import Componentes.PanelGrid;

@@ -9,6 +9,7 @@ public class StandardComboBox extends JComboBox {
         setPreferredSize(new Dimension(150,20));
         font = new Font("Tahoma",Font.BOLD,14);
         setFont(font);
+        this.setEnabled(false);
     }
 
 

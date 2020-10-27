@@ -1,54 +1,90 @@
 package main.controlador;
 
 import main.modelo.ComboModelo;
-import main.vista.JComboEMC;
+import main.vista.ComboVista;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 
 public class ComboControlador implements ItemListener {
-
-    JComboEMC vista;
+    ComboVista vista;
     ComboModelo modelo;
 
-    public ComboControlador(JComboEMC vista , ComboModelo modelo) throws IOException {
+    public ComboControlador(ComboVista vista, ComboModelo modelo) throws IOException {
         this.vista = vista;
         this.modelo = modelo;
 
-        modelo.setNames(this.vista);
+        setData();
+
+    }
+
+    public void setData() throws IOException {
+        String estado = vista.getEstado();
+        String municipio = vista.getMunicipío();
+
+        String[] estados = modelo.getStates();
+        vista.setEstados(estados);
+
+        if (estado == null)
+            return;
+        else {
+            String[] municipios = modelo.getMun(estado);
+            vista.setMunicipios(municipios);
+
+            if (municipio == null)
+                return;
+            else {
+                String[] ciudades = modelo.getCities(municipio, estado);
+                vista.setCiudades(ciudades);
+
+            }
+        }
+
+
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if(e.getStateChange()!=ItemEvent.SELECTED)
+        if (e.getStateChange() != ItemEvent.SELECTED)
             return;
-
-        if(e.getSource() == vista.combostate){
+        if (e.getSource() == vista.combostate) {
             String cadena = (String) vista.combostate.getSelectedItem();
+            System.out.println(cadena);
 
-            if(cadena.compareTo("SELECCIONE")==0)
+            if (cadena.compareTo("SELECCIONE") == 0) {
+                vista.resetStates();
                 return;
+
+            }
+            vista.setEstado(cadena);
             try {
-                modelo.setState(cadena,vista);
+                String municipios[] = modelo.getMun(cadena);
+
+                vista.setMunicipios(municipios);
+
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
-
-            return;
         }
-        if(e.getSource() == vista.combomunicipalities){
-            String cadena = (String) vista.combomunicipalities.getSelectedItem();
 
-            if(cadena.compareTo("SELECCIONE")==0)
+        if (e.getSource() == vista.combomunicipalities) {
+            String cadena = (String) vista.combomunicipalities.getSelectedItem();
+            System.out.println(cadena);
+
+            if (cadena.compareTo("SELECCIONE") == 0) {
+                vista.resetMun();
                 return;
+            }
+
+            vista.setMunicipio(cadena);
             try {
-                modelo.setMunicipalitie(cadena,vista);
+                String ciudades[] = modelo.getCities(cadena, vista.getEstado());
+                vista.setCiudades(ciudades);
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
-
-            return;
         }
     }
 }
+

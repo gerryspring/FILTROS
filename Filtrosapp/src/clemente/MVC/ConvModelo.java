@@ -1,6 +1,6 @@
-package MVC;
+package clemente.MVC;
 
-import MVC.FILES.ArchivoDoc;
+import clemente.MVC.FILES.ArchivoDoc;
 
 import java.io.IOException;
 

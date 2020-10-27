@@ -1,4 +1,4 @@
-package MVC;
+package clemente.MVC;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

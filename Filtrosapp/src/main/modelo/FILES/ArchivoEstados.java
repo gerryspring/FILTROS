@@ -19,52 +19,55 @@ public class ArchivoEstados extends ControladorFicheros {
     }
 
     public void record(String estado) throws IOException {
-        System.out.println("LA LINGITUD ES: "+archivo.length());
+        System.out.println("LA LINGITUD ES: " + archivo.length());
         archivo.seek(archivo.length());
 
-        String aux = Utilidades.padString(estado,50);
+        String aux = Utilidades.padString(estado, 50);
         archivo.writeInt(ID);
         archivo.writeUTF(aux);
 
         ID++;
     }
+
     public int binarysearch(String name) throws IOException {
-        int centro,primero,ultimo;
+        int centro, primero, ultimo;
         String valorCentro;
-        primero = getTotalRegistros()-1;
+        primero = getTotalRegistros() - 1;
         ultimo = 0;
 
 
-        while(ultimo<=primero){
+        while (ultimo <= primero) {
 
-            centro = (primero+ultimo) / 2;
-            archivo.seek(centro*getTamañoRegistro());
+            centro = (primero + ultimo) / 2;
+            archivo.seek(centro * getTamañoRegistro());
 
-            int x  = archivo.readInt();
+            int x = archivo.readInt();
             valorCentro = archivo.readUTF().trim();
 
 
             int pos = name.compareToIgnoreCase(valorCentro);
 
-            if(pos==0)
+            if (pos == 0)
                 return centro;
-            else if(pos>0)
-                ultimo = centro+1;
+            else if (pos > 0)
+                ultimo = centro + 1;
             else
-                primero  = centro-1;
+                primero = centro - 1;
         }
         return -1;
     }
+
     public int getID(int index) throws IOException {
-        archivo.seek(index*getTamañoRegistro());
-        return  archivo.readInt();
+        archivo.seek(index * getTamañoRegistro());
+        return archivo.readInt();
     }
 
     public String[] getAllData() throws IOException {
+
         ArrayList<String> aux = new ArrayList<>();
 
-        for(int i=0;i<getTotalRegistros();i++){
-            archivo.seek(i*getTamañoRegistro());
+        for (int i = 0; i < getTotalRegistros(); i++) {
+            archivo.seek(i * getTamañoRegistro());
             int id = archivo.readInt();
             String name = archivo.readUTF();
 
@@ -72,15 +75,11 @@ public class ArchivoEstados extends ControladorFicheros {
             aux.add(chain);
         }
 
-        String [] list = new String[aux.size()];
+        String[] list = new String[aux.size()];
         list = aux.toArray(list);
 
         return list;
     }
-
-
-
-
 
     public void ordenar() throws IOException {
         String statei, statej;
@@ -89,7 +88,7 @@ public class ArchivoEstados extends ControladorFicheros {
         archivo.seek(0);
 
         for (int i = 0; i < getTotalRegistros() - 1; i++) {
-            for (int j = i+1; j < getTotalRegistros(); j++) {
+            for (int j = i + 1; j < getTotalRegistros(); j++) {
 
                 archivo.seek(i * getTamañoRegistro());
                 idi = archivo.readInt();
@@ -98,7 +97,6 @@ public class ArchivoEstados extends ControladorFicheros {
                 archivo.seek(j * getTamañoRegistro());
                 idj = archivo.readInt();
                 statej = archivo.readUTF();
-
 
 
                 if (statei.compareToIgnoreCase(statej) > 0) {
@@ -117,25 +115,21 @@ public class ArchivoEstados extends ControladorFicheros {
     }
 
 
-
-
-
     @Override
     public int getTamañoRegistro() {
         return 56;
     }
 
     /**
-        ArchivoEstados file = new ArchivoEstados();
+     ArchivoEstados file = new ArchivoEstados();
 
 
 
-         file.record("Baja California");
-         file.record("Colima");
-         file.record("Sinaloa");
-         file.record("Ciudad  mexico");
+     file.record("Baja California");
+     file.record("Colima");
+     file.record("Sinaloa");
+     file.record("Ciudad  mexico");
 
-         file.ordenar();
-
-**/
+     file.ordenar();
+     **/
 }
