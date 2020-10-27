@@ -15,7 +15,7 @@ public class ComboVista extends JFrame {
     public StandardComboBox combostate, combomunicipalities, combocities;
 
     public ComboVista() {
-        super("ESTADOS MUNICIPIOS Y CIUDADES");
+        super("ESTADOS CIUDADES Y COLONIAS");
         state = null;
         municipalitie = null;
         city = null;
@@ -23,7 +23,7 @@ public class ComboVista extends JFrame {
     }
 
     public ComboVista(String estado) {
-        super("ESTADOS MUNICIPIOS Y CIUDADES");
+        super("ESTADOS CIUDADES Y COLONIAS");
         state = estado;
         municipalitie = null;
         city = null;
@@ -32,7 +32,7 @@ public class ComboVista extends JFrame {
     }
 
     public ComboVista(String estado, String municipio) {
-        super("ESTADOS MUNICIPIOS Y CIUDADES");
+        super("ESTADOS CIUDADES Y COLONIAS");
         state = estado;
         municipalitie = municipio;
         city = null;
@@ -124,8 +124,8 @@ public class ComboVista extends JFrame {
         panel.setLayout(new GridLayout(0, 2));
 
         statesLabel = new StandardLabel("Estados", 16, JLabel.CENTER);
-        municipalitiesLabel = new StandardLabel("Municipios", 16, JLabel.CENTER);
-        citiesLabel = new StandardLabel("Ciudades", 16, JLabel.CENTER);
+        municipalitiesLabel = new StandardLabel("Ciudades", 16, JLabel.CENTER);
+        citiesLabel = new StandardLabel("Colonias", 16, JLabel.CENTER);
 
         combostate = new StandardComboBox();
         combomunicipalities = new StandardComboBox();
