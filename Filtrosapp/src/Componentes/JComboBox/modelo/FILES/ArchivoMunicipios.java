@@ -1,4 +1,4 @@
-package main.modelo.FILES;
+package Componentes.JComboBox.modelo.FILES;
 
 import Componentes.ControladorFicheros;
 import Componentes.Utilidades;
@@ -13,7 +13,7 @@ public class ArchivoMunicipios extends ControladorFicheros {
 
 
     public ArchivoMunicipios() throws IOException {
-        super("MUNICIPIOS.DOC");
+        super("D:/EMC/MUNICIPIOS.DOC");
     }
 
     public void record(int IDESTADO, int IDMUNICIPIO, String municipio) throws IOException {

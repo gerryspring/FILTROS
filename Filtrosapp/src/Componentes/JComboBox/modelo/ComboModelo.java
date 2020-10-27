@@ -1,8 +1,8 @@
-package main.modelo;
+package Componentes.JComboBox.modelo;
 
-import main.modelo.FILES.ArchivoCiudades;
-import main.modelo.FILES.ArchivoEstados;
-import main.modelo.FILES.ArchivoMunicipios;
+import Componentes.JComboBox.modelo.FILES.ArchivoCiudades;
+import Componentes.JComboBox.modelo.FILES.ArchivoEstados;
+import Componentes.JComboBox.modelo.FILES.ArchivoMunicipios;
 
 import java.io.IOException;
 

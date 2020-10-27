@@ -1,29 +1,31 @@
-package main.vista;
+package Componentes.JComboBox;
 
-import Componentes.StandardComboBox;
 import Componentes.StandardLabel;
-import main.controlador.ComboControlador;
+import Componentes.JComboBox.controlador.ComboControlador;
+import Componentes.JComboBox.modelo.ComboModelo;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.io.IOException;
 
-public class ComboVista extends JFrame {
+public class JComboBoxEMC extends JPanel {
 
-    JPanel panel;
+    ComboModelo modelo;
+    ComboControlador controlador;
+
     StandardLabel statesLabel, municipalitiesLabel, citiesLabel;
     public String state, municipalitie, city;
     public StandardComboBox combostate, combomunicipalities, combocities;
 
-    public ComboVista() {
-        super("ESTADOS CIUDADES Y COLONIAS");
+    public JComboBoxEMC() throws IOException {
         state = null;
         municipalitie = null;
         city = null;
         doInterface();
     }
 
-    public ComboVista(String estado) {
-        super("ESTADOS CIUDADES Y COLONIAS");
+    public JComboBoxEMC(String estado) throws IOException {
         state = estado;
         municipalitie = null;
         city = null;
@@ -31,14 +33,42 @@ public class ComboVista extends JFrame {
 
     }
 
-    public ComboVista(String estado, String municipio) {
-        super("ESTADOS CIUDADES Y COLONIAS");
+    public JComboBoxEMC(String estado, String municipio) throws IOException {
         state = estado;
         municipalitie = municipio;
         city = null;
         doInterface();
 
     }
+    private void doInterface() throws IOException {
+        setSize(400, 200);
+        setLayout(new GridLayout(0, 2));
+        setBorder(new LineBorder(Color.RED));
+
+
+
+        statesLabel = new StandardLabel("Estados", 16, JLabel.CENTER);
+        municipalitiesLabel = new StandardLabel("Ciudades", 16, JLabel.CENTER);
+        citiesLabel = new StandardLabel("Colonias", 16, JLabel.CENTER);
+
+        combostate = new StandardComboBox();
+        combomunicipalities = new StandardComboBox();
+        combocities = new StandardComboBox();
+
+        add(statesLabel);
+        add(combostate);
+        add(municipalitiesLabel);
+        add(combomunicipalities);
+        add(citiesLabel);
+        add(combocities);
+
+        modelo = new ComboModelo();
+        controlador = new ComboControlador(this,modelo);
+        setListeners(controlador);
+
+
+    }
+
 
     public void setEstados(String[] estados) {
         combostate.setEnabled(true);
@@ -114,32 +144,6 @@ public class ComboVista extends JFrame {
         municipalitie = municipio;
     }
 
-
-    private void doInterface() {
-        setSize(400, 200);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 2));
-
-        statesLabel = new StandardLabel("Estados", 16, JLabel.CENTER);
-        municipalitiesLabel = new StandardLabel("Ciudades", 16, JLabel.CENTER);
-        citiesLabel = new StandardLabel("Colonias", 16, JLabel.CENTER);
-
-        combostate = new StandardComboBox();
-        combomunicipalities = new StandardComboBox();
-        combocities = new StandardComboBox();
-
-        panel.add(statesLabel);
-        panel.add(combostate);
-        panel.add(municipalitiesLabel);
-        panel.add(combomunicipalities);
-        panel.add(citiesLabel);
-        panel.add(combocities);
-
-        add(panel);
-    }
 
     public void setListeners(ComboControlador c) {
         combostate.addItemListener(c);

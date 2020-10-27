@@ -2,8 +2,8 @@ package test;
 
 import Componentes.ControladorFicheros;
 import Componentes.Utilidades;
-import main.modelo.FILES.ArchivoEstados;
-import main.modelo.FILES.ArchivoMunicipios;
+import Componentes.JComboBox.modelo.FILES.ArchivoEstados;
+import Componentes.JComboBox.modelo.FILES.ArchivoMunicipios;
 
 import java.io.IOException;
 

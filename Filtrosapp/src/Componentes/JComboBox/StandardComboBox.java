@@ -1,4 +1,4 @@
-package Componentes;
+package Componentes.JComboBox;
 
 import javax.swing.*;
 import java.awt.*;

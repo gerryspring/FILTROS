@@ -1,4 +1,4 @@
-package main.modelo.FILES;
+package Componentes.JComboBox.modelo.FILES;
 
 import Componentes.ControladorFicheros;
 import Componentes.Utilidades;
@@ -15,7 +15,7 @@ public class ArchivoEstados extends ControladorFicheros {
 
 
     public ArchivoEstados() throws IOException {
-        super("ESTADOS.DOC");
+        super("D:/EMC/ESTADOS.DOC");
     }
 
     public void record(String estado) throws IOException {

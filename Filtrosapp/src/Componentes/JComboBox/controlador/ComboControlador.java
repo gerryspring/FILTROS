@@ -1,17 +1,17 @@
-package main.controlador;
+package Componentes.JComboBox.controlador;
 
-import main.modelo.ComboModelo;
-import main.vista.ComboVista;
+import Componentes.JComboBox.modelo.ComboModelo;
+import Componentes.JComboBox.JComboBoxEMC;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 
 public class ComboControlador implements ItemListener {
-    ComboVista vista;
+    JComboBoxEMC vista;
     ComboModelo modelo;
 
-    public ComboControlador(ComboVista vista, ComboModelo modelo) throws IOException {
+    public ComboControlador(JComboBoxEMC vista, ComboModelo modelo) throws IOException {
         this.vista = vista;
         this.modelo = modelo;
 
